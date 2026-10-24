@@ -1,0 +1,153 @@
+<div class="demo-guide-page container">
+  <!-- Header -->
+  <div class="page-header">
+    <div>
+      <h1>Live Lab Demonstration Checklist & Instructions</h1>
+      <p class="page-subtitle">
+        Exact step-by-step instructions for demonstrating automatic CI/CD deployment to your
+        instructor.
+      </p>
+    </div>
+    <div class="header-badges">
+      <span class="status-badge success">Branch: main</span>
+      <span class="status-badge info">Base: /lab03/</span>
+    </div>
+  </div>
+
+  <!-- Demonstration Overview Box -->
+  <div class="flow-summary-card glass-panel">
+    <div class="flow-pill-row">
+      <span class="flow-step">1. Code Edit (VS Code)</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">2. Git Commit & Push</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">3. CI Validation</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">4. Production Build</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">5. CD Pages Deploy</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">6. Live Site Updated</span>
+    </div>
+  </div>
+
+  <!-- Steps List -->
+  <div class="steps-wrapper">
+    <!-- Step 1 -->
+    <div class="guide-step glass-panel">
+      <div class="step-num">Step 1</div>
+      <div class="step-body">
+        <h3>Open the Target File in VS Code</h3>
+        <p>In your VS Code editor, open the primary dashboard template:</p>
+        <div class="code-box">
+          <code>src/app/pages/dashboard/dashboard.html</code>
+        </div>
+        <p class="step-tip">
+          Look for line 16 with the comment
+          <code>&lt;!-- 🎯 PRIMARY DEMO TARGET TO EDIT --&gt;</code>
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="guide-step glass-panel">
+      <div class="step-num">Step 2</div>
+      <div class="step-body">
+        <h3>Make a Visible Before-and-After Modification</h3>
+        <p>Locate the release badge element:</p>
+
+        <div class="diff-box">
+          <div class="diff-label">Before:</div>
+          <pre
+            class="diff-before"
+          ><code>&lt;span id="lab-demonstration-badge" class="demo-pill-highlight"&gt;
+  🚀 Lab Demo Target: Release v1.0.0 — Production Ready
+&lt;/span&gt;</code></pre>
+
+          <div class="diff-label">After (Example):</div>
+          <pre
+            class="diff-after"
+          ><code>&lt;span id="lab-demonstration-badge" class="demo-pill-highlight"&gt;
+  🚀 Lab Demo Target: Release v1.1.0 — Live CI/CD Verified by Areej!
+&lt;/span&gt;</code></pre>
+        </div>
+        <p>Save the file in VS Code (<code>Ctrl + S</code>).</p>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="guide-step glass-panel">
+      <div class="step-num">Step 3</div>
+      <div class="step-body">
+        <h3>Stage, Commit, and Push via Git Bash or PowerShell</h3>
+        <p>
+          Execute these exact commands in your project root terminal
+          (<code>C:\Users\hp\lab03</code>):
+        </p>
+
+        <div class="terminal-card">
+          <pre><code>git status
+git add src/app/pages/dashboard/dashboard.html
+git commit -m "demo: update live demonstration banner to v1.1.0"
+git push origin main</code></pre>
+          <button class="btn-copy" (click)="copyGitCommands()">
+            {{ copied() ? 'Copied!' : 'Copy Commands' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="guide-step glass-panel">
+      <div class="step-num">Step 4</div>
+      <div class="step-body">
+        <h3>Observe GitHub Actions CI/CD Execution</h3>
+        <p>Open the repository GitHub Actions page:</p>
+        <p>
+          <a [href]="actionsUrl" target="_blank" rel="noopener noreferrer" class="link-external"
+            >{{ actionsUrl }} ↗</a
+          >
+        </p>
+        <ul class="bullet-list">
+          <li>
+            <strong>CI Job:</strong> Watch <code>Build & Validate (CI)</code> start automatically.
+            It checks out code, sets up Node.js v24, runs <code>npm ci</code>, runs automated tests
+            (vitest), and executes <code>ng build --base-href /lab03/</code>.
+          </li>
+          <li>
+            <strong>CD Job:</strong> Once CI succeeds, the
+            <code>Deploy to GitHub Pages (CD)</code> job initiates, uploading the artifact and
+            publishing to GitHub Pages.
+          </li>
+          <li>
+            <strong>Duration:</strong> The entire automated pipeline typically finishes in 40–60
+            seconds with green checkmarks.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="guide-step glass-panel">
+      <div class="step-num">Step 5</div>
+      <div class="step-body">
+        <h3>Verify the Updated Live Website</h3>
+        <p>Navigate to your published GitHub Pages URL:</p>
+        <div class="live-url-card">
+          <a [href]="pagesUrl" target="_blank" rel="noopener noreferrer" class="url-text"
+            >{{ pagesUrl }} ↗</a
+          >
+        </div>
+        <p>
+          Confirm that your new text (<code>Release v1.1.0 — Live CI/CD Verified</code>) is now
+          immediately visible in the banner!
+        </p>
+        <div class="alert-tip">
+          <strong>Troubleshooting Note:</strong> If your browser cached the previous page, do a hard
+          refresh with <code>Ctrl + Shift + R</code> (Windows) to instantly fetch the newly deployed
+          bundle.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

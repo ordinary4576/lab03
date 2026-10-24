@@ -1,0 +1,124 @@
+<header class="navbar-wrapper">
+  <div class="container navbar-container">
+    <a routerLink="/" class="navbar-brand">
+      <div class="brand-icon">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="m4.93 4.93 4.24 4.24"></path>
+          <path d="m14.83 9.17 4.24-4.24"></path>
+          <path d="m14.83 14.83 4.24 4.24"></path>
+          <path d="m9.17 14.83-4.24 4.24"></path>
+          <circle cx="12" cy="12" r="4"></circle>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">DevOps CI/CD Lab Suite</span>
+        <span class="brand-subtitle">Angular & GitHub Pages</span>
+      </div>
+    </a>
+
+    <!-- Top Navigation Links -->
+    <nav class="nav-links">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item"
+        id="nav-dashboard"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <rect width="7" height="9" x="3" y="3" rx="1" />
+          <rect width="7" height="5" x="14" y="3" rx="1" />
+          <rect width="7" height="9" x="14" y="12" rx="1" />
+          <rect width="7" height="5" x="3" y="16" rx="1" />
+        </svg>
+        Overview
+      </a>
+      <a routerLink="/pipelines" routerLinkActive="active" class="nav-item" id="nav-pipelines">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+        CI/CD Pipelines
+      </a>
+      <a routerLink="/services" routerLinkActive="active" class="nav-item" id="nav-services">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <rect width="18" height="18" x="3" y="3" rx="2" />
+          <path d="M3 9h18" />
+          <path d="M9 21V9" />
+        </svg>
+        Services & CDN
+      </a>
+      <a routerLink="/demo-guide" routerLinkActive="active" class="nav-item" id="nav-demo-guide">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+        Demo Instructions
+      </a>
+    </nav>
+
+    <!-- Header Actions & Lab Demo Badge -->
+    <div class="navbar-actions">
+      <!-- 🎯 LIVE DEMO UI ELEMENT: This badge can be modified or checked during evaluation -->
+      <div id="nav-demo-badge" class="badge-demo" title="Live Lab Demonstration Indicator">
+        <span class="pulse-dot"></span>
+        <span class="badge-text">v1.0.0 — Live CI/CD</span>
+      </div>
+
+      <a
+        href="https://github.com/ordinary4576/lab03"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-github"
+        id="btn-github-repo"
+        title="View Source on GitHub"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+          />
+        </svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </div>
+</header>

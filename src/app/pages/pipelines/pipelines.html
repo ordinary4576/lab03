@@ -1,0 +1,126 @@
+<div class="pipelines-page container">
+  <!-- Header -->
+  <div class="page-header">
+    <div>
+      <h1>CI/CD Workflow & Execution History</h1>
+      <p class="page-subtitle">
+        Inspect automated pipeline stages, execution times, and artifact delivery to GitHub Pages.
+      </p>
+    </div>
+    <button
+      class="btn-primary"
+      (click)="onTriggerNewRun()"
+      [disabled]="pipelineService.isSimulating()"
+      id="btn-pipeline-trigger"
+    >
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polygon points="5 3 19 12 5 21 5 3" />
+      </svg>
+      {{ pipelineService.isSimulating() ? 'Running...' : 'Trigger Workflow Run' }}
+    </button>
+  </div>
+
+  <!-- Educational Banner: CI vs CD -->
+  <div class="comparison-card glass-panel">
+    <div class="comparison-col">
+      <div class="col-header">
+        <span class="status-badge success">CI Validation</span>
+        <h3>Continuous Integration (CI)</h3>
+      </div>
+      <p>
+        Automates code integration from multiple contributors. Every push and pull request executes
+        dependency resolution (<code>npm ci</code>), automated unit tests (<code>npm test</code>),
+        and Angular production compilation (<code>ng build</code>). CI guarantees that broken code
+        or syntax errors never reach the production branch.
+      </p>
+    </div>
+    <div class="col-divider"></div>
+    <div class="comparison-col">
+      <div class="col-header">
+        <span class="status-badge info">CD Deployment</span>
+        <h3>Continuous Deployment (CD)</h3>
+      </div>
+      <p>
+        Automates releasing verified software to end-users. After CI validation passes on the
+        <code>main</code> branch, CD bundles the compiled browser artifact
+        (<code>dist/lab03/browser</code>) and deploys it to the GitHub Pages global edge network via
+        official <code>deploy-pages@v4</code> actions.
+      </p>
+    </div>
+  </div>
+
+  <!-- Runs List -->
+  <div class="runs-section">
+    <h2>Workflow Runs</h2>
+    <div class="runs-table glass-panel">
+      @for (run of pipelineService.activeRuns(); track run.id) {
+        <div
+          class="run-row"
+          [class.selected]="selectedRun()?.id === run.id"
+          (click)="selectRun(run)"
+        >
+          <div class="run-main">
+            <div class="run-status">
+              <span class="status-badge success">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Passed
+              </span>
+            </div>
+            <div class="run-info">
+              <span class="run-commit-msg">{{ run.commitMessage }}</span>
+              <div class="run-meta">
+                <span class="meta-tag"
+                  ><code>{{ run.commitHash }}</code></span
+                >
+                <span class="meta-tag"
+                  >branch: <code>{{ run.branch }}</code></span
+                >
+                <span class="meta-tag">author: {{ run.author }}</span>
+                <span class="meta-tag">duration: {{ run.duration }}</span>
+                <span class="meta-tag">{{ run.timestamp }}</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn-secondary btn-sm">
+            {{ selectedRun()?.id === run.id ? 'Hide Steps' : 'View Steps' }}
+          </button>
+        </div>
+
+        <!-- Expanded Steps View -->
+        @if (selectedRun()?.id === run.id) {
+          <div class="run-steps-panel">
+            <h4>Executed Steps ({{ run.steps.length }})</h4>
+            <div class="steps-list">
+              @for (step of run.steps; track step.name) {
+                <div class="step-item">
+                  <div class="step-left">
+                    <span class="step-check">✓</span>
+                    <span class="step-name">{{ step.name }}</span>
+                    <code class="step-cmd">{{ step.command }}</code>
+                  </div>
+                  <span class="step-dur">{{ step.duration }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<footer class="footer-wrapper">
+  <div class="container footer-container">
+    <div class="footer-info">
+      <div class="footer-brand">
+        <span class="footer-title">DevOps CI/CD Lab Suite</span>
+        <span class="footer-desc"
+          >Automated Continuous Integration & Continuous Deployment for Angular on GitHub
+          Pages</span
+        >
+      </div>
+      <p class="footer-meta">
+        Built with Angular 22 & GitHub Actions • Repository:
+        <a [href]="repoUrl" target="_blank" rel="noopener noreferrer">ordinary4576/lab03</a> •
+        Branch: <code>main</code>
+      </p>
+    </div>
+
+    <div class="footer-status-card">
+      <div class="status-indicator">
+        <span class="pulse-dot"></span>
+        <span class="status-label">GitHub Pages Live</span>
+      </div>
+      <a [href]="pagesUrl" target="_blank" rel="noopener noreferrer" class="footer-pages-link">
+        https://ordinary4576.github.io/lab03/
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          <polyline points="15 3 21 3 21 9" />
+          <line x1="10" y1="14" x2="21" y2="3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-container">
+      <span>© {{ currentYear }} DevOps Lab. All rights reserved.</span>
+      <span>Base HREF: <code>/lab03/</code></span>
+    </div>
+  </div>
+</footer>

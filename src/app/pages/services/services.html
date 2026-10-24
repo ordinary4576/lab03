@@ -1,0 +1,153 @@
+<div class="services-page container">
+  <!-- Header -->
+  <div class="page-header">
+    <div>
+      <h1>Backend & Edge Hosting Architecture</h1>
+      <p class="page-subtitle">
+        Architecture overview, GitHub Pages static hosting boundaries, and mock demo gateway.
+      </p>
+    </div>
+    <button class="btn-primary" (click)="onPingAll()" id="btn-services-ping-all">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+      </svg>
+      Run Health Diagnostics
+    </button>
+  </div>
+
+  <!-- Architectural Notice: GitHub Pages Static Limitation -->
+  <div class="architecture-notice glass-panel">
+    <div class="notice-icon">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="8" x2="12" y2="12" />
+        <line x1="12" y1="16" x2="12.01" y2="16" />
+      </svg>
+    </div>
+    <div class="notice-text">
+      <h4>GitHub Pages Hosting Architecture & Backend Boundary Notice</h4>
+      <p>
+        <strong>GitHub Pages is a static file web hosting service</strong> that serves client-side
+        HTML, CSS, JavaScript, and compiled single-page assets. It does not provide server-side
+        execution runtime (such as Python, Node.js Express, or PostgreSQL databases). To preserve
+        100% frontend usability without failing network requests or CORS errors, this Angular
+        frontend uses a <strong>Clearly Identified Demo Mode Service Gateway</strong> for
+        client-side state, simulated latency, and reactive data streams.
+      </p>
+    </div>
+  </div>
+
+  <!-- Services Status Grid -->
+  <div class="services-grid">
+    @for (service of pipelineService.services(); track service.name) {
+      <div class="service-card glass-panel">
+        <div class="card-header">
+          <span class="badge-type">{{ service.type }}</span>
+          <span
+            class="status-badge"
+            [class.success]="service.status === 'operational'"
+            [class.info]="service.status === 'mocked'"
+          >
+            {{ service.status }}
+          </span>
+        </div>
+        <h3>{{ service.name }}</h3>
+        <p class="service-desc">{{ service.description }}</p>
+        <div class="card-footer">
+          <span class="latency-pill">
+            <span class="pulse-dot"></span>
+            Latency: {{ service.latency }}ms
+          </span>
+          <span class="availability-pill">99.98% uptime</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Interactive Diagnostic Submission Form -->
+  <div class="diagnostic-form-wrapper glass-panel">
+    <h3>Submit Diagnostic Log Report</h3>
+    <p class="form-desc">
+      Test interactive form validation and reactive data binding directly on the client.
+    </p>
+
+    @if (submissionSuccess()) {
+      <div class="alert-success" id="alert-diagnostic-success">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+        <span
+          >Diagnostic test logged successfully at {{ lastSubmittedTimestamp() }}! Demo service state
+          recorded.</span
+        >
+      </div>
+    }
+
+    <form (ngSubmit)="onSubmitDiagnostic()" class="diagnostic-form">
+      <div class="form-group">
+        <label for="service-select">Target Microservice</label>
+        <select
+          id="service-select"
+          [ngModel]="diagnosticServiceName()"
+          (ngModelChange)="diagnosticServiceName.set($event)"
+          name="serviceName"
+          class="form-control"
+        >
+          @for (s of pipelineService.services(); track s.name) {
+            <option [value]="s.name">{{ s.name }} ({{ s.type }})</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="diagnostic-notes">Diagnostic Inspection Notes</label>
+        <textarea
+          id="diagnostic-notes"
+          [ngModel]="diagnosticNotes()"
+          (ngModelChange)="diagnosticNotes.set($event)"
+          name="notes"
+          rows="3"
+          class="form-control"
+          placeholder="Enter diagnostic observations..."
+        ></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary" id="btn-submit-diagnostic">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line x1="22" y1="2" x2="11" y2="13" />
+          <polygon points="22 2 15 22 11 13 2 9 22 2" />
+        </svg>
+        Record Diagnostic Entry
+      </button>
+    </form>
+  </div>
+</div>
